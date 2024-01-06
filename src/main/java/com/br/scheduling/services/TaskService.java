@@ -6,6 +6,9 @@ import com.br.scheduling.models.Task;
 import com.br.scheduling.models.enums.StatusTask;
 import com.br.scheduling.repositories.TaskRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -37,9 +40,12 @@ public class TaskService {
                 .collect(Collectors.toList());
     }
 
-    public List<TaskDTO> pageSearchTask(){
-        return null;
+    public Page<TaskDTO> findPageableTask(Integer page, Integer size){
+        Pageable pageable = PageRequest.of(page,size);
+        Page<Task> taskPageable = taskRepository.findPageable(pageable);
+        return taskPageable.map(taskDTOMapper);
     }
+
     public TaskDTO createTask(TaskDTO taskDTO){
         Task task = new Task();
 
