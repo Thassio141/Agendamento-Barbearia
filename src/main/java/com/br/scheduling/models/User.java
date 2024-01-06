@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
@@ -16,9 +17,10 @@ import java.util.List;
 
 @Data
 @Entity
-@Table(name="users")
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@Table(name="users")
 public class User implements UserDetails {
 
     @Id
@@ -38,7 +40,7 @@ public class User implements UserDetails {
     private String cellphoneNumber;
 
     @NotNull
-    @Enumerated(EnumType.STRING)
+    @Enumerated(EnumType.ORDINAL)
     private UserType userType;
 
     @Override
