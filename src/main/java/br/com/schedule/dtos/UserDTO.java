@@ -8,7 +8,6 @@ public class UserDTO {
     @NotNull
     private Long id;
 
-    @NotBlank
     private String name;
 
     @NotBlank
@@ -17,7 +16,6 @@ public class UserDTO {
     @NotBlank
     private String password;
 
-    @NotBlank
     private String phoneNumber;
 
     @NotNull

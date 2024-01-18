@@ -5,7 +5,6 @@ import br.com.schedule.models.enums.UserStatus;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
@@ -18,7 +17,6 @@ import java.util.List;
 @Data
 @Entity
 @NoArgsConstructor
-@AllArgsConstructor
 @Table(name = "users")
 public class User implements UserDetails{
 
@@ -26,27 +24,27 @@ public class User implements UserDetails{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank
     private String name;
 
-    @NotBlank
     private String email;
 
-    @NotBlank
     private String password;
 
-    @NotBlank
     private String phoneNumber;
 
-    @NotNull
     private UserRole userRole;
 
-    @NotNull
     private UserStatus userStatus;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Schedule> scheduleList;
 
+
+    public User(String email,String password, UserRole role){
+        this.email = email;
+        this.password = password;
+        this.userRole = role;
+    }
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         if(this.userRole == UserRole.ADMIN) return List.of(new SimpleGrantedAuthority("ROLE_ADMIN"), new SimpleGrantedAuthority("ROLE_USER")
@@ -77,11 +75,5 @@ public class User implements UserDetails{
     @Override
     public boolean isEnabled() {
         return true;
-    }
-
-    public User(String email,String password, UserRole role){
-        this.email = email;
-        this.password = password;
-        this.userRole = role;
     }
 }
