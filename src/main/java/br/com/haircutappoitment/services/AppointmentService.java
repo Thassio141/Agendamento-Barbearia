@@ -55,6 +55,7 @@ public class AppointmentService {
         AppointmentEntity appointmentEntity = convertCreateDtoToEntity(appointmentCreateDto);
         appointmentEntity.setTask(appointmentCreateDto.getTask());
         appointmentEntity.setUser(appointmentCreateDto.getUser());
+//        appointmentEntity.setDateTime();
         appointmentEntity.setStatus(AppointmentStatus.RESERVED);
 
         appointmentRepository.save(appointmentEntity);
@@ -63,7 +64,7 @@ public class AppointmentService {
 
     public AppointmentCreateDto updateAppointment(Long id, AppointmentCreateDto appointmentCreateDto){
         AppointmentEntity appointmentEntity = findByIdEntity(id);
-        appointmentEntity.setDate(LocalDate.now()); // ToDo melhorar update
+        // ToDo melhorar update
         appointmentRepository.save(appointmentEntity);
         return convertEntityToCreateDto(appointmentEntity);
     }
@@ -93,6 +94,7 @@ public class AppointmentService {
                 .orElseThrow(() -> new NotFoundException("Could not find appointment with id:" + id));
     }
 
+    //ToDo validacoes de horario e data
     private AppointmentEntity convertDtoToEntity(AppointmentDto appointmentDto){
         return modelMapper.map(appointmentDto, AppointmentEntity.class);
     }

@@ -10,6 +10,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -17,6 +19,9 @@ public class AppointmentDto {
     
     @NotNull
     private Long appointmentId;
+
+    @NotNull
+    private LocalDateTime dateTime;
 
     @NotNull
     private UserEntity user;

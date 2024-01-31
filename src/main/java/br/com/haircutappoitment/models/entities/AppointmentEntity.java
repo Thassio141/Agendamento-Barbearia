@@ -14,8 +14,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDate;
-import java.util.Date;
+import java.time.DayOfWeek;
+import java.time.LocalDateTime;
 
 @Data
 @Entity
@@ -29,8 +29,8 @@ public class AppointmentEntity {
     @Column(name = "appointment_id")
     private Long appointmentId;
 
-    @Column(name = "date")
-    private LocalDate date;
+    @Column(name = "date_time")
+    private LocalDateTime dateTime;
 
     @Column(name = "appointment_status")
     private AppointmentStatus status;
