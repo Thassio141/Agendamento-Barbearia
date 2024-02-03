@@ -1,11 +1,10 @@
 package br.com.haircutappoitment.services;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import br.com.haircutappoitment.exceptions.NotFoundException;
-import br.com.haircutappoitment.models.enums.AppointmentStatus;
+import br.com.haircutappoitment.domain.enums.AppointmentStatus;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -13,9 +12,9 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import br.com.haircutappoitment.models.dtos.appointment.AppointmentCreateDto;
-import br.com.haircutappoitment.models.dtos.appointment.AppointmentDto;
-import br.com.haircutappoitment.models.entities.AppointmentEntity;
+import br.com.haircutappoitment.domain.dtos.appointment.AppointmentCreateDto;
+import br.com.haircutappoitment.domain.dtos.appointment.AppointmentDto;
+import br.com.haircutappoitment.domain.entities.AppointmentEntity;
 import br.com.haircutappoitment.repositories.AppointmentRepository;
 
 @Service

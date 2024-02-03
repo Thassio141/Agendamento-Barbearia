@@ -1,8 +1,7 @@
-package br.com.haircutappoitment.models.dtos.appointment;
+package br.com.haircutappoitment.domain.dtos.appointment;
 
-import br.com.haircutappoitment.models.dtos.task.TaskDto;
-import br.com.haircutappoitment.models.entities.TaskEntity;
-import br.com.haircutappoitment.models.entities.UserEntity;
+import br.com.haircutappoitment.domain.entities.TaskEntity;
+import br.com.haircutappoitment.domain.entities.UserEntity;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;

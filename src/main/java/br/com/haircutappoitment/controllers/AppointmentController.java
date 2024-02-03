@@ -2,8 +2,8 @@ package br.com.haircutappoitment.controllers;
 
 import br.com.haircutappoitment.exceptions.BadRequestException;
 import br.com.haircutappoitment.exceptions.InternalServerErrorException;
-import br.com.haircutappoitment.models.dtos.appointment.AppointmentCreateDto;
-import br.com.haircutappoitment.models.dtos.appointment.AppointmentDto;
+import br.com.haircutappoitment.domain.dtos.appointment.AppointmentCreateDto;
+import br.com.haircutappoitment.domain.dtos.appointment.AppointmentDto;
 import br.com.haircutappoitment.services.AppointmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;

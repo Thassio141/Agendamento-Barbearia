@@ -1,4 +1,4 @@
-package br.com.haircutappoitment.models.enums;
+package br.com.haircutappoitment.domain.enums;
 
 public enum AppointmentStatus {
     

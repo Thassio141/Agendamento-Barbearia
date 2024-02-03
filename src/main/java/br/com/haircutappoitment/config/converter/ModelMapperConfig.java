@@ -1,4 +1,4 @@
-package br.com.haircutappoitment.config;
+package br.com.haircutappoitment.config.converter;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;

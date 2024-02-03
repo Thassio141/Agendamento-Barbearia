@@ -1,8 +1,8 @@
-package br.com.haircutappoitment.models.entities;
+package br.com.haircutappoitment.domain.entities;
 
 import java.time.LocalTime;
 
-import br.com.haircutappoitment.models.enums.ActivityStatus;
+import br.com.haircutappoitment.domain.enums.ActivityStatus;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

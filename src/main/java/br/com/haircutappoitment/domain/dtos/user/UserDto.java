@@ -1,6 +1,7 @@
-package br.com.haircutappoitment.models.dtos.user;
+package br.com.haircutappoitment.domain.dtos.user;
 
-import br.com.haircutappoitment.models.enums.UserRole;
+import br.com.haircutappoitment.domain.enums.ActivityStatus;
+import br.com.haircutappoitment.domain.enums.UserRole;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -8,10 +9,13 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
-public class UserCreateDto {
+@NoArgsConstructor
+public class UserDto {
     
+    @NotNull
+    private Long id;
+
     @NotBlank
     private String name;
 
@@ -21,6 +25,9 @@ public class UserCreateDto {
     @NotBlank
     private String password;
 
+    @NotNull
+    private ActivityStatus activityStatus;
+    
     @NotNull
     private UserRole userRole;
 }

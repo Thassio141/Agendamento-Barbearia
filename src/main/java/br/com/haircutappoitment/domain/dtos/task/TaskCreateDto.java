@@ -1,10 +1,10 @@
-package br.com.haircutappoitment.models.dtos.task;
+package br.com.haircutappoitment.domain.dtos.task;
 
 import java.time.LocalTime;
 
+import br.com.haircutappoitment.domain.enums.ActivityStatus;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import br.com.haircutappoitment.models.enums.ActivityStatus;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;

@@ -12,10 +12,10 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import br.com.haircutappoitment.models.dtos.user.UserCreateDto;
-import br.com.haircutappoitment.models.dtos.user.UserDto;
-import br.com.haircutappoitment.models.entities.UserEntity;
-import br.com.haircutappoitment.models.enums.ActivityStatus;
+import br.com.haircutappoitment.domain.dtos.user.UserCreateDto;
+import br.com.haircutappoitment.domain.dtos.user.UserDto;
+import br.com.haircutappoitment.domain.entities.UserEntity;
+import br.com.haircutappoitment.domain.enums.ActivityStatus;
 import br.com.haircutappoitment.repositories.UserRepository;
 
 @Service

@@ -1,6 +1,6 @@
-package br.com.haircutappoitment.models.entities;
+package br.com.haircutappoitment.domain.entities;
 
-import br.com.haircutappoitment.models.enums.AppointmentStatus;
+import br.com.haircutappoitment.domain.enums.AppointmentStatus;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -14,7 +14,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.DayOfWeek;
 import java.time.LocalDateTime;
 
 @Data
