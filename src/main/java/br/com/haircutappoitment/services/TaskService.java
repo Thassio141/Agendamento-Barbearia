@@ -3,8 +3,6 @@ package br.com.haircutappoitment.services;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import br.com.haircutappoitment.exceptions.BadRequestException;
-import br.com.haircutappoitment.exceptions.CustomizeResponseExceptionHandler;
 import br.com.haircutappoitment.exceptions.NotFoundException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -14,10 +12,10 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.com.haircutappoitment.models.dtos.task.TaskCreateDto;
-import br.com.haircutappoitment.models.dtos.task.TaskDto;
-import br.com.haircutappoitment.models.entities.TaskEntity;
-import br.com.haircutappoitment.models.enums.ActivityStatus;
+import br.com.haircutappoitment.domain.dtos.task.TaskCreateDto;
+import br.com.haircutappoitment.domain.dtos.task.TaskDto;
+import br.com.haircutappoitment.domain.entities.TaskEntity;
+import br.com.haircutappoitment.domain.enums.ActivityStatus;
 import br.com.haircutappoitment.repositories.TaskRepository;
 
 @Service

@@ -1,11 +1,10 @@
 package br.com.haircutappoitment.services;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import br.com.haircutappoitment.exceptions.NotFoundException;
-import br.com.haircutappoitment.models.enums.AppointmentStatus;
+import br.com.haircutappoitment.domain.enums.AppointmentStatus;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -13,9 +12,9 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import br.com.haircutappoitment.models.dtos.appointment.AppointmentCreateDto;
-import br.com.haircutappoitment.models.dtos.appointment.AppointmentDto;
-import br.com.haircutappoitment.models.entities.AppointmentEntity;
+import br.com.haircutappoitment.domain.dtos.appointment.AppointmentCreateDto;
+import br.com.haircutappoitment.domain.dtos.appointment.AppointmentDto;
+import br.com.haircutappoitment.domain.entities.AppointmentEntity;
 import br.com.haircutappoitment.repositories.AppointmentRepository;
 
 @Service
@@ -55,6 +54,7 @@ public class AppointmentService {
         AppointmentEntity appointmentEntity = convertCreateDtoToEntity(appointmentCreateDto);
         appointmentEntity.setTask(appointmentCreateDto.getTask());
         appointmentEntity.setUser(appointmentCreateDto.getUser());
+//        appointmentEntity.setDateTime();
         appointmentEntity.setStatus(AppointmentStatus.RESERVED);
 
         appointmentRepository.save(appointmentEntity);
@@ -63,7 +63,7 @@ public class AppointmentService {
 
     public AppointmentCreateDto updateAppointment(Long id, AppointmentCreateDto appointmentCreateDto){
         AppointmentEntity appointmentEntity = findByIdEntity(id);
-        appointmentEntity.setDate(LocalDate.now()); // ToDo melhorar update
+        // ToDo melhorar update
         appointmentRepository.save(appointmentEntity);
         return convertEntityToCreateDto(appointmentEntity);
     }
@@ -93,6 +93,7 @@ public class AppointmentService {
                 .orElseThrow(() -> new NotFoundException("Could not find appointment with id:" + id));
     }
 
+    //ToDo validacoes de horario e data
     private AppointmentEntity convertDtoToEntity(AppointmentDto appointmentDto){
         return modelMapper.map(appointmentDto, AppointmentEntity.class);
     }
