@@ -7,15 +7,7 @@ import java.util.Set;
 
 import br.com.haircutappoitment.domain.enums.ActivityStatus;
 import br.com.haircutappoitment.domain.enums.UserRole;
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -45,9 +37,11 @@ public class UserEntity implements UserDetails {
     @Column(name = "password")
     private String password;
 
+    @Enumerated(EnumType.ORDINAL)
     @Column(name = "user_role")
     private UserRole userRole;
 
+    @Enumerated(EnumType.ORDINAL)
     @Column(name = "user_status")
     private ActivityStatus userStatus;
 
