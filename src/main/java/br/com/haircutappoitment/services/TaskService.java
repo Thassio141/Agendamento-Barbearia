@@ -21,14 +21,14 @@ import br.com.haircutappoitment.repositories.TaskRepository;
 @Service
 public class TaskService {
     
-    @Autowired
     private final TaskRepository taskRepository;
 
-    @Autowired
-    private ModelMapper modelMapper;
+    private final ModelMapper modelMapper;
 
-    public TaskService(TaskRepository taskRepository) {
+    @Autowired
+    public TaskService(TaskRepository taskRepository, ModelMapper modelMapper) {
         this.taskRepository = taskRepository;
+        this.modelMapper = modelMapper;
     }
 
     public List<TaskDto> findAllTask(){
@@ -50,8 +50,9 @@ public class TaskService {
     }
 
     public TaskCreateDto createTask(TaskCreateDto taskCreateDto){
-        taskCreateDto.setStatusTask(ActivityStatus.ACTIVE);
-        TaskEntity task = taskRepository.save(convertCreateDtoToEntity(taskCreateDto));
+        TaskEntity taskEntity = convertCreateDtoToEntity(taskCreateDto);
+        taskEntity.setStatusTask(ActivityStatus.ACTIVE);
+        TaskEntity task = taskRepository.save(taskEntity);
         return convertEntityToCreateDto(task);
     }
 
@@ -87,10 +88,6 @@ public class TaskService {
     private TaskEntity findByIdEntity(Long id){
         return taskRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Could not found task with id:" + id));
-    }
-
-    private TaskEntity convertDtoToEntity(TaskDto taskDto){
-        return modelMapper.map(taskDto, TaskEntity.class);
     }
 
     private TaskDto convertEntityToDto(TaskEntity taskEntity){

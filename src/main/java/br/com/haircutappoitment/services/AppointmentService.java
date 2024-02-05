@@ -20,12 +20,11 @@ import br.com.haircutappoitment.repositories.AppointmentRepository;
 @Service
 public class AppointmentService {
     
-    @Autowired
     private final AppointmentRepository appointmentRepository;
 
-    @Autowired
     private final ModelMapper modelMapper;
 
+    @Autowired
     public AppointmentService(AppointmentRepository appointmentRepository, ModelMapper modelMapper) {
         this.appointmentRepository = appointmentRepository;
         this.modelMapper = modelMapper;
@@ -63,7 +62,7 @@ public class AppointmentService {
 
     public AppointmentCreateDto updateAppointment(Long id, AppointmentCreateDto appointmentCreateDto){
         AppointmentEntity appointmentEntity = findByIdEntity(id);
-        // ToDo melhorar update
+        modelMapper.map(appointmentCreateDto,appointmentEntity);
         appointmentRepository.save(appointmentEntity);
         return convertEntityToCreateDto(appointmentEntity);
     }
@@ -88,15 +87,11 @@ public class AppointmentService {
     }
 
     private AppointmentEntity findByIdEntity(Long id){
-        //ToDo error message
         return appointmentRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Could not find appointment with id:" + id));
     }
 
     //ToDo validacoes de horario e data
-    private AppointmentEntity convertDtoToEntity(AppointmentDto appointmentDto){
-        return modelMapper.map(appointmentDto, AppointmentEntity.class);
-    }
 
     private AppointmentDto convertEntityToDto(AppointmentEntity appointmentEntity){
         return modelMapper.map(appointmentEntity, AppointmentDto.class);

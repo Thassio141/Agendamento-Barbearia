@@ -1,10 +1,13 @@
 package br.com.haircutappoitment.services;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
+import br.com.haircutappoitment.domain.dtos.user.UserCreateDto;
+import br.com.haircutappoitment.domain.dtos.user.UserDto;
+import br.com.haircutappoitment.domain.dtos.user.UserUpdateDto;
+import br.com.haircutappoitment.domain.entities.UserEntity;
+import br.com.haircutappoitment.domain.enums.ActivityStatus;
+import br.com.haircutappoitment.domain.enums.UserRole;
 import br.com.haircutappoitment.exceptions.NotFoundException;
-import org.modelmapper.Conditions;
+import br.com.haircutappoitment.repositories.UserRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -12,23 +15,20 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import br.com.haircutappoitment.domain.dtos.user.UserCreateDto;
-import br.com.haircutappoitment.domain.dtos.user.UserDto;
-import br.com.haircutappoitment.domain.entities.UserEntity;
-import br.com.haircutappoitment.domain.enums.ActivityStatus;
-import br.com.haircutappoitment.repositories.UserRepository;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class UserService {
     
-    @Autowired
     private final UserRepository userRepository;
 
-    @Autowired
-    private ModelMapper modelMapper;
+    private final ModelMapper modelMapper;
 
-    public UserService(UserRepository userRepository) {
+    @Autowired
+    public UserService(UserRepository userRepository, ModelMapper modelMapper) {
         this.userRepository = userRepository;
+        this.modelMapper = modelMapper;
     }
     
     public List<UserDto> findAllUsers(){
@@ -50,16 +50,24 @@ public class UserService {
         return userEntities.map(this::convertEntityToDto);
     }
 
-    public UserCreateDto updateUser(Long id, UserCreateDto userCreateDto){
+    public UserUpdateDto updateUser(Long id, UserUpdateDto userUpdateDto){
         UserEntity userEntity = findByIdEntity(id);
-        
-        modelMapper.getConfiguration().setPropertyCondition(Conditions.isNotNull());
 
-        modelMapper.map(userCreateDto, userEntity);
+        modelMapper.map(userUpdateDto, userEntity);
 
         userRepository.save(userEntity);
 
-        return userCreateDto;
+        return convertEntityToUpdateDto(userEntity);
+    }
+
+    public UserCreateDto updateUserRole(Long id, UserRole userRole){
+        UserEntity userEntity = findByIdEntity(id);
+
+        userEntity.setUserRole(userRole);
+
+        userRepository.save(userEntity);
+
+        return convertEntityToCreateDto(userEntity);
     }
 
     public void deleteUser(Long id){
@@ -80,24 +88,19 @@ public class UserService {
     }
 
     private UserEntity findByIdEntity(Long id){
-        //ToDo message error
         return userRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Could not find user with id:"+ id));
-    }
-
-    private UserEntity convertDtoToEntity(UserDto userDto){
-        return modelMapper.map(userDto, UserEntity.class);
     }
 
     private UserDto convertEntityToDto(UserEntity userEntity){
         return modelMapper.map(userEntity, UserDto.class);
     }
 
-    private UserEntity convertCreateDtoToEntity(UserCreateDto userCreateDto){
-        return modelMapper.map(userCreateDto, UserEntity.class);
-    }
-
     private UserCreateDto convertEntityToCreateDto(UserEntity userEntity){
         return modelMapper.map(userEntity, UserCreateDto.class);
+    }
+
+    private UserUpdateDto convertEntityToUpdateDto(UserEntity userEntity){
+        return modelMapper.map(userEntity,UserUpdateDto.class);
     }
 }

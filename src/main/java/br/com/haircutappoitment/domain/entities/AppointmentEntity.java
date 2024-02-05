@@ -1,15 +1,7 @@
 package br.com.haircutappoitment.domain.entities;
 
 import br.com.haircutappoitment.domain.enums.AppointmentStatus;
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -31,6 +23,7 @@ public class AppointmentEntity {
     @Column(name = "date_time")
     private LocalDateTime dateTime;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "appointment_status")
     private AppointmentStatus status;
 
